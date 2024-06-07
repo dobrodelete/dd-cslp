@@ -1,0 +1,101 @@
+version: '3.7'
+
+services:
+  api-gateway:
+    build: ./api-gateway/backend
+    ports:
+      - "8000:8000"
+    depends_on:
+      - dd-service
+      - dd-ctf
+      - dd-task-tracker
+      - dd-blog
+      - rabbitmq
+      - jaeger
+      - consul
+      - prometheus
+      - grafana
+    environment:
+      USER_SERVICE_URL: http://dd-service:8000
+      CTF_SERVICE_URL: http://dd-ctf:8000
+      TASK_SERVICE_URL: http://dd-task-tracker:8000
+      BLOG_SERVICE_URL: http://dd-blog:8000
+
+  dd-service:
+    build: ./services/dd-user/backend
+    ports:
+      - "8001:8000"
+    environment:
+      DATABASE_URL: "postgresql+asyncpg://user:password@db/dd_service"
+      CONSUL_HTTP_ADDR: "consul:8500"
+      JAEGER_AGENT_HOST: "jaeger"
+
+  dd-ctf:
+    build: ./services/dd-ctf/backend
+    ports:
+      - "8002:8000"
+    environment:
+      DATABASE_URL: "postgresql+asyncpg://user:password@db/dd_ctf"
+      CONSUL_HTTP_ADDR: "consul:8500"
+      JAEGER_AGENT_HOST: "jaeger"
+
+  dd-task-tracker:
+    build: ./services/dd-task-tracker/backend
+    ports:
+      - "8003:8000"
+    environment:
+      DATABASE_URL: "postgresql+asyncpg://user:password@db/dd_task_tracker"
+      CONSUL_HTTP_ADDR: "consul:8500"
+      JAEGER_AGENT_HOST: "jaeger"
+
+  dd-blog:
+    build: ./services/dd-blog/backend
+    ports:
+      - "8004:8000"
+    environment:
+      DATABASE_URL: "postgresql+asyncpg://user:password@db/dd_blog"
+      CONSUL_HTTP_ADDR: "consul:8500"
+      JAEGER_AGENT_HOST: "jaeger"
+
+  frontend:
+    build: ./frontend/nuxt-app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api-gateway
+    environment:
+      API_URL: http://api-gateway:8000/api
+
+  prometheus:
+    build: ./monitoring/prometheus
+    ports:
+      - "9090:9090"
+
+  grafana:
+    build: ./monitoring/grafana
+    ports:
+      - "3001:3000"
+    depends_on:
+      - prometheus
+
+  jaeger:
+    build: ./tracing/jaeger
+    ports:
+      - "6831:6831/udp"
+      - "16686:16686"
+
+  rabbitmq:
+    build: ./messaging/rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  consul:
+    build: ./config/consul
+    ports:
+      - "8500:8500"
+
+networks:
+  default:
+    external:
+      name: web
