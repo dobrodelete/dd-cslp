@@ -1,0 +1,19 @@
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: 'api-gateway'
+    static_configs:
+      - targets: ['api-gateway:8000']
+  - job_name: 'dd-service'
+    static_configs:
+      - targets: ['dd-service:8000']
+  - job_name: 'dd-ctf'
+    static_configs:
+      - targets: ['dd-ctf:8000']
+  - job_name: 'dd-task-tracker'
+    static_configs:
+      - targets: ['dd-task-tracker:8000']
+  - job_name: 'dd-blog'
+    static_configs:
+      - targets: ['dd-blog:8000']
