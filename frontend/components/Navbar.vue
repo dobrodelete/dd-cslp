@@ -3,10 +3,10 @@
     <div class="max-w-7xl mx-auto px-4 py-2 flex justify-between items-center">
       <div>
         <nuxt-link to="/" class="font-bold text-xl text-blue-600 pl-3.5 pr-3.5">Главная</nuxt-link>
-        <nuxt-link to="/ddctf" class="font-bold text-xl text-blue-600 pl-3.5 pr-3.5">ddCTF</nuxt-link>
-        <nuxt-link to="/blog" class="font-bold text-xl text-blue-600 pl-3.5 pr-3.5">ddBlog</nuxt-link>
-        <nuxt-link to="/task-tracker" class="font-bold text-xl text-blue-600 pl-3.5 pr-3.5">ddTaskTracker</nuxt-link>
-        <nuxt-link to="/docs" class="font-bold text-xl text-blue-600 pl-3.5 pr-3.5">Docs</nuxt-link>
+        <nuxt-link to="/ddctf/" class="font-bold text-xl text-blue-600 pl-3.5 pr-3.5">ddCTF</nuxt-link>
+        <nuxt-link to="/blog/" class="font-bold text-xl text-blue-600 pl-3.5 pr-3.5">ddBlog</nuxt-link>
+        <nuxt-link to="/task-tracker/" class="font-bold text-xl text-blue-600 pl-3.5 pr-3.5">ddTaskTracker</nuxt-link>
+        <nuxt-link to="/docs/" class="font-bold text-xl text-blue-600 pl-3.5 pr-3.5">Docs</nuxt-link>
       </div>
       <div>
         <button v-if="!isAuthenticated" @click="goToLogin" class="mr-2 text-blue-600">Вход</button>

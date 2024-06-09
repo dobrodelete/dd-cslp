@@ -1,6 +1,6 @@
 <template>
   <NuxtLayout name="admin">
-    <UVerticalNavigation :links="links" />
+    <!-- <UVerticalNavigation :links="links" /> -->
     <div class="p-5">
       <h1 class="text-3xl font-bold mb-6">Административная панель</h1>
       <div class="grid grid-cols-2 gap-4">

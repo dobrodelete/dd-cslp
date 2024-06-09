@@ -1,8 +1,6 @@
 <template>
   <div>
-    <TaskTrackerNavbar>
-    </TaskTrackerNavbar>
-    <slot />
+    
   </div>
 </template>
 

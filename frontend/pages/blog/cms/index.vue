@@ -1,11 +1,11 @@
 <template>
-  <NuxtLayout name="admin">
+  <NuxtLayout name="blog">
     <div class="p-5">
       <h1 class="text-3xl font-bold mb-4">CMS Dashboard</h1>
-      <button @click="addArticle" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mb-4">
+      <nuxt-link to="/blog/cms/create" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mb-7">
         Добавить статью
-      </button>
-      <div class="overflow-x-auto">
+      </nuxt-link>
+      <div class="overflow-x-auto mt-5">
         <table class="min-w-full bg-white">
           <thead>
             <tr class="w-full bg-gray-200 text-left">
@@ -46,6 +46,7 @@ const articles = ref([
 
 const addArticle = () => {
   console.log('Adding new article');
+  
   // Logic to add a new article
 };
 
