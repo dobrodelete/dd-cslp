@@ -2,7 +2,7 @@
   <NuxtLayout name="blog">
     <div class="container mx-auto p-6">
       <header class="mb-8">
-        <h1 class="text-4xl font-bold">Блог</h1>
+        <h1 class="text-4xl font-bold">Ваши подписки:</h1>
       </header>
       <div class="flex">
         <main class="flex-grow pr-4">
@@ -18,7 +18,7 @@
         <aside class="w-1/4">
           <div class="sticky top-4">
             <input type="text" placeholder="Поиск..." class="w-full p-2 mb-4 border rounded">
-            <h3 class="font-bold mb-2">Популярные посты</h3>
+            <h3 class="font-bold mb-2">Может быть интересно:</h3>
             <ul>
               <li v-for="popular in popularPosts" :key="popular.id" class="mb-2">
                 <nuxt-link :to="`/blog/post/${popular.id}`" class="hover:text-blue-500">

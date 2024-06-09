@@ -1,5 +1,6 @@
 <template>
   <div>
+    <BlogHeader />
     <slot />
   </div>
 </template>
