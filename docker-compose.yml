@@ -1,101 +1,163 @@
-version: '3.7'
+version: '3.8'
 
 services:
   api-gateway:
-    build: ./api-gateway/backend
+    build:
+      context: ./api-gateway/backend
+      dockerfile: Dockerfile
+    container_name: api-gateway
     ports:
       - "8000:8000"
     depends_on:
-      - dd-service
+      - dd-user
       - dd-ctf
-      - dd-task-tracker
       - dd-blog
-      - rabbitmq
-      - jaeger
-      - consul
-      - prometheus
-      - grafana
-    environment:
-      USER_SERVICE_URL: http://dd-service:8000
-      CTF_SERVICE_URL: http://dd-ctf:8000
-      TASK_SERVICE_URL: http://dd-task-tracker:8000
-      BLOG_SERVICE_URL: http://dd-blog:8000
+      - dd-task-tracker
 
-  dd-service:
-    build: ./services/dd-user/backend
+  dd-user:
+    build:
+      context: ./services/dd-user/backend
+      dockerfile: Dockerfile
+    container_name: dd-user
     ports:
       - "8001:8000"
     environment:
-      DATABASE_URL: "postgresql+asyncpg://user:password@db/dd_service"
-      CONSUL_HTTP_ADDR: "consul:8500"
-      JAEGER_AGENT_HOST: "jaeger"
+      - DATABASE_URL=postgresql://postgres:postgres@user-db:5432/cslp_user
+    depends_on:
+      - user-db
+      - dd-user-migrations
 
   dd-ctf:
-    build: ./services/dd-ctf/backend
+    build:
+      context: ./services/dd-ctf/backend
+      dockerfile: Dockerfile
+    container_name: dd-ctf
     ports:
       - "8002:8000"
     environment:
-      DATABASE_URL: "postgresql+asyncpg://user:password@db/dd_ctf"
-      CONSUL_HTTP_ADDR: "consul:8500"
-      JAEGER_AGENT_HOST: "jaeger"
+      - DATABASE_URL=postgresql://postgres:postgres@ctf-db:5432/cslp_ctf
+    depends_on:
+      - ctf-db
+      - dd-ctf-migrations
 
-  dd-task-tracker:
-    build: ./services/dd-task-tracker/backend
+  dd-blog:
+    build:
+      context: ./services/dd-blog/backend
+      dockerfile: Dockerfile
+    container_name: dd-blog
     ports:
       - "8003:8000"
     environment:
-      DATABASE_URL: "postgresql+asyncpg://user:password@db/dd_task_tracker"
-      CONSUL_HTTP_ADDR: "consul:8500"
-      JAEGER_AGENT_HOST: "jaeger"
+      - DATABASE_URL=postgresql://postgres:postgres@blog-db:5432/cslp_blog
+    depends_on:
+      - blog-db
+      - dd-blog-migrations
 
-  dd-blog:
-    build: ./services/dd-blog/backend
+  dd-task-tracker:
+    build:
+      context: ./services/dd-task-tracker/backend
+      dockerfile: Dockerfile
+    container_name: dd-task-tracker
     ports:
       - "8004:8000"
     environment:
-      DATABASE_URL: "postgresql+asyncpg://user:password@db/dd_blog"
-      CONSUL_HTTP_ADDR: "consul:8500"
-      JAEGER_AGENT_HOST: "jaeger"
+      - DATABASE_URL=postgresql://postgres:postgres@task-tracker-db:5432/cslp_task_tracker
+    depends_on:
+      - task-tracker-db
+      - dd-task-tracker-migrations
+
+  dd-user-migrations:
+    build:
+      context: ./services/dd-user/backend
+      dockerfile: Dockerfile.migrations
+    container_name: dd-user-migrations
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@user-db:5432/cslp_user
+    depends_on:
+      - user-db
+
+  dd-ctf-migrations:
+    build:
+      context: ./services/dd-ctf/backend
+      dockerfile: Dockerfile.migrations
+    container_name: dd-ctf-migrations
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@ctf-db:5432/cslp_ctf
+    depends_on:
+      - ctf-db
+
+  dd-blog-migrations:
+    build:
+      context: ./services/dd-blog/backend
+      dockerfile: Dockerfile.migrations
+    container_name: dd-blog-migrations
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@blog-db:5432/cslp_blog
+    depends_on:
+      - blog-db
+
+  dd-task-tracker-migrations:
+    build:
+      context: ./services/dd-task-tracker/backend
+      dockerfile: Dockerfile.migrations
+    container_name: dd-task-tracker-migrations
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@task-tracker-db:5432/cslp_task_tracker
+    depends_on:
+      - task-tracker-db
 
   frontend:
-    build: ./frontend/nuxt-app
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: frontend
     ports:
       - "3000:3000"
     depends_on:
       - api-gateway
+
+  user-db:
+    image: postgres:16
+    container_name: user-db
     environment:
-      API_URL: http://api-gateway:8000/api
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=user_db
+    volumes:
+      - user-db-data:/var/lib/postgresql/data
 
-  prometheus:
-    build: ./monitoring/prometheus
-    ports:
-      - "9090:9090"
+  ctf-db:
+    image: postgres:16
+    container_name: ctf-db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=ctf_db
+    volumes:
+      - ctf-db-data:/var/lib/postgresql/data
 
-  grafana:
-    build: ./monitoring/grafana
-    ports:
-      - "3001:3000"
-    depends_on:
-      - prometheus
+  blog-db:
+    image: postgres:16
+    container_name: blog-db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=blog_db
+    volumes:
+      - blog-db-data:/var/lib/postgresql/data
 
-  jaeger:
-    build: ./tracing/jaeger
-    ports:
-      - "6831:6831/udp"
-      - "16686:16686"
+  task-tracker-db:
+    image: postgres:16
+    container_name: task-tracker-db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=task_tracker_db
+    volumes:
+      - task-tracker-db-data:/var/lib/postgresql/data
 
-  rabbitmq:
-    build: ./messaging/rabbitmq
-    ports:
-      - "5672:5672"
-      - "15672:15672"
-
-  consul:
-    build: ./config/consul
-    ports:
-      - "8500:8500"
-
-networks:
-  default:
-    external:
-      name: web
+volumes:
+  user-db-data:
+  ctf-db-data:
+  blog-db-data:
+  task-tracker-db-data:
