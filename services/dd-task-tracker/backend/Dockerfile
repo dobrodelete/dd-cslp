@@ -1,17 +1,22 @@
-# Используем официальный образ Python в качестве базового образа
 FROM python:3.11-slim
 
-# Устанавливаем рабочую директорию в контейнере
+RUN pip install poetry
+
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    libpq-dev \
+    && apt-get clean
+
+ENV POETRY_VIRTUALENVS_CREATE=false
+
 WORKDIR /app
 
-# Копируем файл зависимостей в контейнер
-COPY requirements.txt .
+COPY pyproject.toml poetry.lock /app/
 
-# Устанавливаем зависимости
-RUN pip install --no-cache-dir -r requirements.txt
+RUN poetry install --no-root
 
-# Копируем содержимое директории в рабочую директорию контейнера
-COPY . .
+COPY ./app /app/app
+COPY alembic.ini /app/alembic.ini
+COPY alembic /app/alembic
 
-# Команда для запуска приложения
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+CMD ["poetry", "run", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]

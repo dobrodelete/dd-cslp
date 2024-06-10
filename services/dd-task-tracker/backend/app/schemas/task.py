@@ -22,5 +22,9 @@ class TaskRead(TaskBase):
     id: int
     created_at: datetime
     updated_at: datetime
-    comments: List["TaskCommentRead"] = []
-    assignments: List["TaskAssignmentRead"] = []
+    # comments: List["TaskCommentRead"] = []
+    # assignments: List["TaskAssignmentRead"] = []
+
+
+class TaskUpdate(TaskRead):
+    pass

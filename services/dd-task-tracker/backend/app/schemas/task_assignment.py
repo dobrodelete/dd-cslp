@@ -17,3 +17,7 @@ class TaskAssignmentCreate(TaskAssignmentBase):
 class TaskAssignmentRead(TaskAssignmentBase):
     id: int
     assigned_at: datetime
+
+
+class TaskAssignmentUpdate(TaskAssignmentRead):
+    pass

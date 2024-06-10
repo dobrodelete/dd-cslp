@@ -15,3 +15,7 @@ class TaskStatusCreate(TaskStatusBase):
 
 class TaskStatusRead(TaskStatusBase):
     id: int
+
+
+class TaskStatusUpdate(TaskStatusRead):
+    pass

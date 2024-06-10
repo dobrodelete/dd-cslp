@@ -19,3 +19,7 @@ class ProjectRead(ProjectBase):
     created_at: datetime
     updated_at: datetime
     owner_id: int
+
+
+class ProjectUpdate(ProjectRead):
+    pass

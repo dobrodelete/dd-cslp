@@ -14,7 +14,6 @@ class Project(Base):
     description: Mapped[str] = mapped_column(String, nullable=True)
     created_at: Mapped[DateTime] = mapped_column(DateTime, server_default=func.now())
     updated_at: Mapped[DateTime] = mapped_column(DateTime, server_default=func.now(), server_onupdate=func.now())
-    owner_id: Mapped[BigInteger] = mapped_column(BigInteger, ForeignKey("users.id"))
+    owner_id: Mapped[BigInteger] = mapped_column(BigInteger)
 
-    owner: Mapped["User"] = relationship("User")
     tasks: Mapped[List["Task"]] = relationship("Task", back_populates="project")

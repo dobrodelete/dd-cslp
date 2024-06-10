@@ -9,9 +9,8 @@ class TaskComment(Base):
 
     id: Mapped[BigInteger] = mapped_column(BigInteger, primary_key=True, autoincrement=True)
     task_id: Mapped[BigInteger] = mapped_column(BigInteger, ForeignKey("tasks.id"))
-    author_id: Mapped[BigInteger] = mapped_column(BigInteger, ForeignKey("users.id"))
+    author_id: Mapped[BigInteger] = mapped_column(BigInteger)
     content: Mapped[str] = mapped_column(String, nullable=False)
     created_at: Mapped[DateTime] = mapped_column(DateTime, server_default=func.now())
 
     task: Mapped["Task"] = relationship("Task", back_populates="comments")
-    author: Mapped["User"] = relationship("User")

@@ -18,3 +18,7 @@ class TaskCommentCreate(TaskCommentBase):
 class TaskCommentRead(TaskCommentBase):
     id: int
     created_at: datetime
+
+
+class TaskCommentUpdate(TaskCommentRead):
+    pass
