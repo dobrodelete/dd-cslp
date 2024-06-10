@@ -12,18 +12,18 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import { useStore } from '@/store'
+// import { useStore } from '@/store'
 
 const layout = "ddctf"
 
 const user = ref(null)
-const store = useStore()
+// const store = useStore()
 
-onMounted(async () => {
-  const response = await $fetch('/api/v1/jwt/users/me', {
-    headers: { Authorization: `Bearer ${store.state.token}` }
-  })
-  user.value = response
-})
+// onMounted(async () => {
+//   const response = await $fetch('/api/v1/jwt/users/me', {
+//     headers: { Authorization: `Bearer ${store.state.token}` }
+//   })
+//   user.value = response
+// })
 </script>
   
