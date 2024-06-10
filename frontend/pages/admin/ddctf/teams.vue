@@ -32,7 +32,7 @@ const teams = ref([
   { id: 2, name: 'Beta', membersCount: 4, points: 290 },
   { id: 3, name: 'Gamma', membersCount: 6, points: 410 }
 ]);
-const layout = "ddctf-admin"
+const layout = "admin-ctf"
 </script>
 
 <style>

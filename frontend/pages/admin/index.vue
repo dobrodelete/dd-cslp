@@ -1,6 +1,5 @@
 <template>
-  <NuxtLayout name="admin">
-    <!-- <UVerticalNavigation :links="links" /> -->
+  <NuxtLayout name="admin-panel">
     <div class="p-5">
       <h1 class="text-3xl font-bold mb-6">Административная панель</h1>
       <div class="grid grid-cols-2 gap-4">
@@ -18,31 +17,10 @@
         </div>
       </div>
     </div>
-    
   </NuxtLayout>
 </template>
 
 <script setup>
-const sendNewsletter = () => {
-  console.log('Рассылка отправлена');
-};
-
-const route = useRoute()
-
-const links = [{
-  label: 'ddCTF',
-  icon: 'arcticons--nethack',
-  to: '/admin/ddctf'
-}, {
-  label: 'Blog',
-  icon: 'carbon--blog',
-  to: '/admin/blog'
-}, {
-  label: 'Task Tracker',
-  icon: 'material-symbols--task',
-  to: '/admin/task-tracker'
-}]
-
 </script>
 
 <style scoped>

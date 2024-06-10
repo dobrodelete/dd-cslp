@@ -9,7 +9,7 @@
 
 <script lang="ts" setup>
 
-const layout = "ddctf-admin"
+const layout = "admin-ctf"
 </script>
 
 <style>

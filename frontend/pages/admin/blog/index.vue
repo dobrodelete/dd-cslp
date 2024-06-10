@@ -1,5 +1,5 @@
 <template>
-  <NuxtLayout name="admin">
+  <NuxtLayout name="admin-blog">
     <div class="p-5">
       <h1 class="text-3xl font-bold mb-6">Административная панель блога</h1>
       <div class="grid grid-cols-3 gap-4">

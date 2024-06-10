@@ -37,6 +37,8 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 
+const layout = "admin-ctf"
+
 const categories = ref([
   { id: 1, name: 'Web Security' },
   { id: 2, name: 'Binary Exploitation' },
@@ -57,7 +59,6 @@ const deleteCategory = (id) => {
   console.log('Deleting category with ID:', id);
   // Here you would add logic to delete a category
 };
-const layout = "ddctf-admin"
 </script>
 
 <style>

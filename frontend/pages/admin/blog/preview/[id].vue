@@ -1,5 +1,5 @@
 <template>
-  <NuxtLayout name="admin">
+  <NuxtLayout name="admin-blog">
     <div class="container mx-auto p-6">
       <article class="bg-white p-6 shadow rounded-lg">
         <header>

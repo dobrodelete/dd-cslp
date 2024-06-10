@@ -35,7 +35,7 @@ const users = ref([
   { id: 3, name: 'Charlie Lee', email: 'charlie@example.com', role: 'User', status: 'Active' },
   { id: 4, name: 'Dana Bailey', email: 'dana@example.com', role: 'Moderator', status: 'Active' }
 ]);
-const layout = "ddctf-admin"
+const layout = "admin-ctf"
 </script>
 
 <style>

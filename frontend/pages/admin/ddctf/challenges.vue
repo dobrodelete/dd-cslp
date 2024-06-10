@@ -41,7 +41,7 @@ const challenges = ref([
   { id: 2, name: 'Cross-site Scripting (XSS)', category: 'Web Security', points: 150 },
   { id: 3, name: 'Binary Exploitation 101', category: 'Binary Exploitation', points: 200 }
 ]);
-const layout = "ddctf-admin"
+const layout = "admin-ctf"
 </script>
 
 <style>
