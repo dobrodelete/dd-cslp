@@ -7,16 +7,16 @@
   
   <script setup>
   import { ref, onMounted } from 'vue'
-  import { useStore } from '@/store'
+  // import { useStore } from '@/store'
   
   const ctfSettings = ref(null)
-  const store = useStore()
+  // const store = useStore()
   
-  onMounted(async () => {
-    const response = await $fetch('/api/v1/ctf/settings', {
-      headers: { Authorization: `Bearer ${store.state.token}` }
-    })
-    ctfSettings.value = response
-  })
+  // onMounted(async () => {
+  //   const response = await $fetch('/api/v1/ctf/settings', {
+  //     headers: { Authorization: `Bearer ${store.state.token}` }
+  //   })
+  //   ctfSettings.value = response
+  // })
   </script>
   
