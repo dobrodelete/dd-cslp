@@ -21,8 +21,6 @@ class PasswordChangeRead(PasswordChangeBase):
     id: int
     created_at: datetime
 
-    # user: Optional["UserRead"] = None
-
 
 class PasswordChangeUpdate(PasswordChangeRead):
     pass

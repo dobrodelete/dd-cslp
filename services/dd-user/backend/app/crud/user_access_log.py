@@ -29,7 +29,8 @@ class UserAccessLogCrud(CrudBase):
             db_user_access_log = UserAccessLog(
                 user_id=user_access_log.user_id,
                 timestamp=user_access_log.timestamp,
-                ip_address=user_access_log.ip_address,
+                ip_address_v4=user_access_log.ip_address_v4,
+                ip_address_v6=user_access_log.ip_address_v6,
                 action=user_access_log.action,
                 status=user_access_log.status,
                 user_agent=user_access_log.user_agent,
@@ -47,7 +48,8 @@ class UserAccessLogCrud(CrudBase):
                 .values(
                     user_id=user_access_log.user_id,
                     timestamp=user_access_log.timestamp,
-                    ip_address=user_access_log.ip_address,
+                    ip_address_v4=user_access_log.ip_address_v4,
+                    ip_address_v6=user_access_log.ip_address_v6,
                     action=user_access_log.action,
                     status=user_access_log.status,
                     user_agent=user_access_log.user_agent,

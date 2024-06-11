@@ -25,8 +25,6 @@ class UserSecurityRead(UserSecurityBase):
     id: int
     created_at: datetime
 
-    # user: Optional["UserRead"] = None
-
 
 class UserSecurityUpdate(UserSecurityRead):
     pass

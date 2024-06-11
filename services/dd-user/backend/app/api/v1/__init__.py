@@ -2,11 +2,15 @@ from fastapi import APIRouter
 
 from .endpoints import association_router, blocked_ip_router, login_attempt_router, password_change_router, \
     permission_router, role_router, user_router, user_access_log_router, user_security_router, user_session_router, \
-    user_settings_router
+    user_settings_router, admin_users_router, admin_roles_router, admin_permissions_router, check_router
 
 api_router = APIRouter()
 
 api_router.include_router(user_router)
+api_router.include_router(check_router)
+api_router.include_router(admin_users_router)
+api_router.include_router(admin_roles_router)
+api_router.include_router(admin_permissions_router)
 api_router.include_router(association_router, prefix="/association", tags=["association"])
 api_router.include_router(blocked_ip_router, prefix="/blocked_ip", tags=["blocked ip"])
 api_router.include_router(login_attempt_router, prefix="/login_attempt", tags=["login attempt"])

@@ -21,8 +21,6 @@ class UserSettingsRead(UserSettingsBase):
     id: int
     created_at: datetime
 
-    # user: Optional["UserRead"] = None
-
 
 class UserSettingsUpdate(UserSettingsRead):
     pass

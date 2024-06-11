@@ -35,4 +35,3 @@ class User(Base):
     user_security: Mapped[List["UserSecurity"]] = relationship(back_populates="user", cascade="all, delete-orphan")
     user_session: Mapped[List["UserSession"]] = relationship(back_populates="user", cascade="all, delete-orphan")
     user_settings: Mapped[List["UserSettings"]] = relationship(back_populates="user", cascade="all, delete-orphan")
-

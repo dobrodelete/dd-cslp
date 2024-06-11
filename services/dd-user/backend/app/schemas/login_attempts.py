@@ -23,8 +23,6 @@ class LoginAttemptRead(LoginAttemptBase):
     id: int
     created_at: datetime
 
-    # user: Optional["UserRead"] = None
-
 
 class LoginAttemptUpdate(LoginAttemptRead):
     pass

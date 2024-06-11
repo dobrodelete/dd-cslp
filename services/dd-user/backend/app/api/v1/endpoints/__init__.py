@@ -1,5 +1,9 @@
+from .admin.users import router as admin_users_router
+from .admin.roles import router as admin_roles_router
+from .admin.permissions import router as admin_permissions_router
 from .association import router as association_router
 from .blocked_ip import router as blocked_ip_router
+from .check import router as check_router
 from .login_attempt import router as login_attempt_router
 from .password_change import router as password_change_router
 from .permission import router as permission_router

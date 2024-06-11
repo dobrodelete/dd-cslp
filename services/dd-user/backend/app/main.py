@@ -1,3 +1,5 @@
+from app.schemas import *
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -14,4 +16,4 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(api_router, prefix=settings.api_v1_prefix, tags=["Api V1"])
+app.include_router(api_router, prefix=settings.api_v1_prefix)

@@ -1,10 +1,11 @@
 from typing import Optional, List
 
 from sqlalchemy import select, update, delete
+from sqlalchemy.orm import selectinload
 
 from app.crud.base import CrudBase
 from app.models.permission import Permission
-from app.schemas.permission import PermissionCreate, PermissionUpdate, PermissionRead
+from app.schemas.permission import PermissionCreate, PermissionUpdate, PermissionRead, PermissionRoleRead
 
 
 class PermissionCrud(CrudBase):
@@ -90,3 +91,21 @@ class PermissionCrud(CrudBase):
     async def delete_permission(self, id: int) -> None:
         async with self.insert_session_scope() as s:
             await s.execute(delete(Permission).where(Permission.id == id))
+
+    async def get_permission_with_roles(self, permission_id: int) -> Optional[PermissionRoleRead]:
+        async with self.read_session_scope() as s:
+            result = await s.execute(
+                select(Permission).where(Permission.id == permission_id).options(
+                    selectinload(Permission.roles)
+                )
+            )
+            permission: Optional[Permission] = result.scalar()
+            return PermissionRoleRead.model_validate(permission) if permission else None
+
+    async def get_permissions_with_roles(self, skip: int = 0, limit: int = 100) -> List[PermissionRoleRead]:
+        async with self.read_session_scope() as s:
+            result = await s.execute(
+                select(Permission).options(selectinload(Permission.roles)).offset(skip).limit(limit)
+            )
+            permissions: List[Permission] = result.scalars().all()
+            return [PermissionRoleRead.model_validate(permission) for permission in permissions]

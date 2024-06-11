@@ -24,8 +24,6 @@ class UserAccessLogRead(UserAccessLogBase):
     id: int
     created_at: datetime
 
-    # user: Optional["UserRead"] = None
-
 
 class UserAccessLogUpdate(UserAccessLogRead):
     pass

@@ -19,9 +19,10 @@ class PermissionRead(PermissionBase):
     id: int
     created_at: datetime
 
-    # roles: Optional[List["RoleRead"]] = None
-    # users: Optional[List["UserRead"]] = None
-
 
 class PermissionUpdate(PermissionRead):
     pass
+
+
+class PermissionRoleRead(PermissionRead):
+    roles: Optional[List["RoleRead"]] = None

@@ -20,8 +20,6 @@ class UserSessionCreate(UserSessionBase):
 class UserSessionRead(UserSessionBase):
     id: int
 
-    # user: Optional["UserRead"] = None
-
 
 class UserSessionUpdate(UserSessionRead):
     pass

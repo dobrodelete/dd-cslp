@@ -3,7 +3,7 @@ from typing import List
 from fastapi import APIRouter, HTTPException
 
 from app.crud import permission_crud
-from app.schemas import PermissionCreate, PermissionUpdate, PermissionRead
+from app.schemas import PermissionCreate, PermissionUpdate, PermissionRead, PermissionRoleRead
 
 router = APIRouter()
 
@@ -40,3 +40,16 @@ async def delete_permission(permission_id: int):
     if deleted_permission is None:
         raise HTTPException(status_code=404, detail="Permission not found")
     return deleted_permission
+
+
+@router.get("/{permission_id}/roles", response_model=PermissionRoleRead)
+async def get_permission_with_roles(permission_id: int):
+    permission = await permission_crud.get_permission_with_roles(permission_id)
+    if not permission:
+        raise HTTPException(status_code=404, detail="Permission not found")
+    return permission
+
+
+@router.get("/", response_model=List[PermissionRoleRead])
+async def get_permissions_with_roles(skip: int = 0, limit: int = 100):
+    return await permission_crud.get_permissions_with_roles(skip, limit)

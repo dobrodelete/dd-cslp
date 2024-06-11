@@ -1,10 +1,10 @@
 from typing import Optional, List
 
-from sqlalchemy import select, delete
+from sqlalchemy import select, delete, update
 
 from app.crud import CrudBase
 from app.models import LoginAttempts
-from app.schemas import LoginAttemptCreate, LoginAttemptRead
+from app.schemas import LoginAttemptCreate, LoginAttemptRead, LoginAttemptUpdate
 
 
 class LoginAttemptCrud(CrudBase):
@@ -37,6 +37,25 @@ class LoginAttemptCrud(CrudBase):
             s.add(db_login_attempt)
             await s.flush()
             return db_login_attempt
+
+    async def update_login_attempt(self, login_attempt: LoginAttemptUpdate) -> Optional[LoginAttemptRead]:
+        async with self.insert_session_scope() as s:
+            result = await s.execute(
+                update(LoginAttempts)
+                .where(LoginAttempts.id == login_attempt.id)
+                .values(
+                    user_id=login_attempt.user_id,
+                    attempt_time=login_attempt.attempt_time,
+                    ip_address_v4=login_attempt.ip_address_v4,
+                    ip_address_v6=login_attempt.ip_address_v6,
+                    user_agent=login_attempt.user_agent,
+                    successful=login_attempt.successful
+                )
+                .returning(LoginAttempts)
+            )
+            updated_login_attempt: Optional[LoginAttempts] = result.scalar()
+            await s.commit()
+            return LoginAttemptRead.model_validate(updated_login_attempt) if updated_login_attempt else None
 
     async def delete_login_attempt(self, id: int) -> None:
         async with self.insert_session_scope() as s:

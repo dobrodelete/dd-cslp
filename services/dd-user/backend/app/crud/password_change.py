@@ -55,3 +55,4 @@ class PasswordChangeCrud(CrudBase):
     async def delete_password_change(self, id: int) -> None:
         async with self.insert_session_scope() as s:
             await s.execute(delete(PasswordChanges).where(PasswordChanges.id == id))
+            await s.commit()

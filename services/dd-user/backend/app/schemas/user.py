@@ -26,7 +26,7 @@ class UserRead(UserBase):
     created_at: datetime
     updated_at: datetime
 
-    # roles: Optional[List["RoleRead"]] = Field(default=None)
+    # roles: List["RoleRead"] = Field(default=None)
     # permissions: Optional[List["PermissionRead"]] = Field(default=None)
     # login_attempts: Optional[List["LoginAttemptRead"]] = Field(default=None)
     # password_changes: Optional[List["PasswordChangeRead"]] = Field(default=None)
@@ -38,7 +38,6 @@ class UserRead(UserBase):
 
 class UserSchema(UserBase):
     id: int
-    # password_hash: bytes
     created_at: datetime
     updated_at: datetime
 

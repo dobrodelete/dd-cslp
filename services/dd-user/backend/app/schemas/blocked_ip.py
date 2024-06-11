@@ -21,6 +21,7 @@ class BlockedIPRead(BlockedIPBase):
     id: int
     created_at: datetime
     blocked_at: datetime
+    updated_at: datetime
 
 
 class BlockedIPUpdate(BlockedIPRead):
