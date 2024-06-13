@@ -9,7 +9,7 @@ from app.crud import user_crud, user_session_crud
 from app.schemas import UserRead, Token, UserCreate, UserSessionCreate
 from app.utils.jwt import encode_jwt, hash_password, create_access_token, create_refresh_token, create_jwt
 from app.utils.validation import validate_auth_user, get_current_auth_user_for_refresh, \
-    get_current_token_payload, get_current_active_auth_user
+    get_current_token_payload, get_current_active_auth_user, validate_auth_user_form
 
 http_bearer = HTTPBearer(auto_error=False)
 
@@ -18,6 +18,18 @@ router = APIRouter(
     tags=["JWT"],
     dependencies=[Depends(http_bearer)],
 )
+
+
+@router.post("/login_form/", response_model=Token)
+def auth_user_issue_jwt(
+        user: UserRead = Depends(validate_auth_user_form),
+):
+    access_token = create_access_token(user)
+    refresh_token = create_refresh_token(user)
+    return Token(
+        access_token=access_token,
+        refresh_token=refresh_token,
+    )
 
 
 @router.post("/register/", response_model=Token)
