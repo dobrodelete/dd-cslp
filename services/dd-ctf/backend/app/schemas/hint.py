@@ -1,4 +1,5 @@
 from pydantic import BaseModel, ConfigDict
+from datetime import datetime
 
 
 class HintBase(BaseModel):
@@ -15,7 +16,8 @@ class HintCreate(HintBase):
 
 class HintRead(HintBase):
     id: int
+    created_at: datetime
 
 
 class HintUpdate(HintRead):
-    pass
+    id: int

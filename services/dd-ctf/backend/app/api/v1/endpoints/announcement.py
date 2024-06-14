@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 
 from fastapi import APIRouter, HTTPException
 
@@ -21,7 +21,7 @@ async def get_announcement(announcement_id: int):
     return announcement
 
 
-@router.get("/", response_model=List[AnnouncementRead])
+@router.get("/", response_model=Optional[List[AnnouncementRead]])
 async def get_announcements(skip: int = 0, limit: int = 100):
     return await announcement_crud.get_announcements(skip, limit)
 

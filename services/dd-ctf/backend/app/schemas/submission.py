@@ -19,7 +19,8 @@ class SubmissionCreate(SubmissionBase):
 class SubmissionRead(SubmissionBase):
     id: int
     submission_time: datetime
+    created_at: datetime
 
 
 class SubmissionUpdate(SubmissionRead):
-    pass
+    id: int

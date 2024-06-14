@@ -1,5 +1,6 @@
 from pydantic import BaseModel, ConfigDict
 from typing import Optional
+from datetime import datetime
 
 
 class CategoryBase(BaseModel):
@@ -15,7 +16,8 @@ class CategoryCreate(CategoryBase):
 
 class CategoryRead(CategoryBase):
     id: int
+    created_at: datetime
 
 
-class CategoryUpdate(CategoryRead):
-    pass
+class CategoryUpdate(CategoryBase):
+    id: int

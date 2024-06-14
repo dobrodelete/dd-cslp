@@ -16,7 +16,8 @@ class TeamMemberCreate(TeamMemberBase):
 class TeamMemberRead(TeamMemberBase):
     id: int
     joined_at: datetime
+    created_at: datetime
 
 
 class TeamMemberUpdate(TeamMemberRead):
-    pass
+    id: int

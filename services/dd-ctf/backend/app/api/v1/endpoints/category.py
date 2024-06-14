@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 from fastapi import APIRouter, HTTPException
 from app.crud import category_crud
 from app.schemas import CategoryCreate, CategoryUpdate, CategoryRead
@@ -11,7 +11,7 @@ async def create_category(category: CategoryCreate):
     return await category_crud.create_category(category)
 
 
-@router.get("/{category_id}", response_model=CategoryRead)
+@router.get("/{category_id}", response_model=Optional[CategoryRead])
 async def get_category(category_id: int):
     category = await category_crud.get_category(category_id)
     if category is None:
@@ -19,7 +19,7 @@ async def get_category(category_id: int):
     return category
 
 
-@router.get("/", response_model=List[CategoryRead])
+@router.get("/", response_model=Optional[List[CategoryRead]])
 async def get_categories(skip: int = 0, limit: int = 100):
     return await category_crud.get_categories(skip, limit)
 

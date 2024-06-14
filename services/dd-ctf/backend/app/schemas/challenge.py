@@ -21,8 +21,6 @@ class ChallengeCreate(ChallengeBase):
 class ChallengeRead(ChallengeBase):
     id: int
     created_at: datetime
-    # hints: List["HintRead"] = []
-    # submissions: List["SubmissionRead"] = []
 
 
 class ChallengeUpdate(ChallengeRead):

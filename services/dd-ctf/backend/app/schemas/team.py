@@ -1,5 +1,5 @@
 from pydantic import BaseModel, ConfigDict
-from typing import Optional, List
+from typing import Optional
 from datetime import datetime
 
 
@@ -17,8 +17,7 @@ class TeamCreate(TeamBase):
 class TeamRead(TeamBase):
     id: int
     created_at: datetime
-    # members: List["TeamMemberRead"] = []
 
 
 class TeamUpdate(TeamRead):
-    pass
+    id: int

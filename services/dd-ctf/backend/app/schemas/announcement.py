@@ -19,5 +19,5 @@ class AnnouncementRead(AnnouncementBase):
     created_at: datetime
 
 
-class AnnouncementUpdate(AnnouncementRead):
-    pass
+class AnnouncementUpdate(AnnouncementBase):
+    id: int
