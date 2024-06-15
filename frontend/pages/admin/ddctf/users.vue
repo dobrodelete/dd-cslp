@@ -1,26 +1,28 @@
 <template>
   <NuxtLayout :name="layout">
-    <div>
-      <h1 class="text-3xl font-bold mb-4">Список пользователей</h1>
-      <div class="overflow-x-auto">
-        <table class="min-w-full bg-white">
-          <thead>
-            <tr class="w-full bg-gray-200 text-left">
-              <th class="px-4 py-2">Имя</th>
-              <th class="px-4 py-2">Email</th>
-              <th class="px-4 py-2">Роль</th>
-              <th class="px-4 py-2">Статус</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="user in users" :key="user.id" class="hover:bg-gray-100">
-              <td class="border px-4 py-2">{{ user.name }}</td>
-              <td class="border px-4 py-2">{{ user.email }}</td>
-              <td class="border px-4 py-2">{{ user.role }}</td>
-              <td class="border px-4 py-2">{{ user.status }}</td>
-            </tr>
-          </tbody>
-        </table>
+    <div class="min-h-screen bg-gray-100 p-6">
+      <div class="max-w-6xl mx-auto">
+        <h1 class="text-3xl font-bold mb-4">Список пользователей</h1>
+        <div class="overflow-x-auto">
+          <table class="min-w-full bg-white">
+            <thead>
+              <tr class="w-full bg-gray-200 text-left">
+                <th class="px-4 py-2">Имя</th>
+                <th class="px-4 py-2">Email</th>
+                <th class="px-4 py-2">Роль</th>
+                <th class="px-4 py-2">Статус</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="user in users" :key="user.id" class="hover:bg-gray-100">
+                <td class="border px-4 py-2">{{ user.name }}</td>
+                <td class="border px-4 py-2">{{ user.email }}</td>
+                <td class="border px-4 py-2">{{ user.role }}</td>
+                <td class="border px-4 py-2">{{ user.status }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </NuxtLayout>

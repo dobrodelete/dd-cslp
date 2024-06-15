@@ -1,36 +1,38 @@
 <template>
   <NuxtLayout :name="layout">
-    <div class="container mx-auto p-6">
-    <h1 class="text-3xl font-bold mb-6">Управление ответами на задачи CTF</h1>
-    <button @click="newAnswer" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mb-4">
-      Добавить ответ
-    </button>
-    <div class="overflow-x-auto">
-      <table class="min-w-full bg-white">
-        <thead class="bg-gray-200">
-          <tr>
-            <th class="px-4 py-2">Задача</th>
-            <th class="px-4 py-2">Ответ</th>
-            <th class="px-4 py-2">Действия</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="answer in answers" :key="answer.id" class="hover:bg-gray-100">
-            <td class="border px-4 py-2">{{ answer.taskTitle }}</td>
-            <td class="border px-4 py-2">{{ answer.content }}</td>
-            <td class="border px-4 py-2">
-              <button @click="editAnswer(answer)" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-3 rounded">
-                Редактировать
-              </button>
-              <button @click="deleteAnswer(answer.id)" class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-3 rounded">
-                Удалить
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="min-h-screen bg-gray-100 p-6">
+      <div class="max-w-6xl mx-auto">
+        <h1 class="text-3xl font-bold mb-6">Управление ответами на задачи CTF</h1>
+        <button @click="newAnswer" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mb-4">
+          Добавить ответ
+        </button>
+        <div class="overflow-x-auto">
+          <table class="min-w-full bg-white">
+            <thead class="bg-gray-200">
+              <tr>
+                <th class="px-4 py-2">Задача</th>
+                <th class="px-4 py-2">Ответ</th>
+                <th class="px-4 py-2">Действия</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="answer in answers" :key="answer.id" class="hover:bg-gray-100">
+                <td class="border px-4 py-2">{{ answer.taskTitle }}</td>
+                <td class="border px-4 py-2">{{ answer.content }}</td>
+                <td class="border px-4 py-2">
+                  <button @click="editAnswer(answer)" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-3 rounded">
+                    Редактировать
+                  </button>
+                  <button @click="deleteAnswer(answer.id)" class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-3 rounded">
+                    Удалить
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
-  </div>
   </NuxtLayout>
 </template>
 
