@@ -1,8 +1,10 @@
 from typing import Optional, List
+
 from sqlalchemy import select, update, delete
-from app.crud.base import CrudBase
-from app.models.hint import Hint
-from app.schemas.hint import HintCreate, HintUpdate, HintRead
+
+from app.crud import CrudBase
+from app.models import Hint
+from app.schemas import HintCreate, HintUpdate, HintRead
 
 
 class HintCrud(CrudBase):

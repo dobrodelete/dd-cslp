@@ -1,8 +1,11 @@
 from typing import Optional, List
+
 from sqlalchemy import select, update, delete
-from app.crud.base import CrudBase
-from app.models.submission import Submission
-from app.schemas.submission import SubmissionCreate, SubmissionUpdate, SubmissionRead
+
+from app.crud import CrudBase
+from app.models import Submission
+from app.schemas import SubmissionCreate, SubmissionUpdate, SubmissionRead
+
 
 class SubmissionCrud(CrudBase):
     def __init__(self):

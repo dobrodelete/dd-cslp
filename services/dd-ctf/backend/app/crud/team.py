@@ -1,8 +1,10 @@
 from typing import Optional, List
+
 from sqlalchemy import select, update, delete
-from app.crud.base import CrudBase
-from app.models.team import Team
-from app.schemas.team import TeamCreate, TeamUpdate, TeamRead
+
+from app.crud import CrudBase
+from app.models import Team
+from app.schemas import TeamCreate, TeamUpdate, TeamRead
 
 
 class TeamCrud(CrudBase):

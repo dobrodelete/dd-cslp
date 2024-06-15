@@ -1,5 +1,7 @@
 from typing import List, Optional
+
 from fastapi import APIRouter, HTTPException
+
 from app.crud import category_crud
 from app.schemas import CategoryCreate, CategoryUpdate, CategoryRead
 

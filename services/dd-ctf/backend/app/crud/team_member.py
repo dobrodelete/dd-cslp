@@ -2,8 +2,8 @@ from typing import Optional, List
 
 from sqlalchemy import select, update, delete
 
-from app.crud.base import CrudBase
-from app.models.team_member import TeamMember
+from app.crud import CrudBase
+from app.models import TeamMember
 from app.schemas import TeamMemberCreate, TeamMemberUpdate, TeamMemberRead
 
 
@@ -21,7 +21,8 @@ class TeamMemberCrud(CrudBase):
         async with self.read_session_scope() as s:
             result = await s.execute(select(TeamMember).offset(skip).limit(limit))
             team_memberships: Optional[List[TeamMember]] = result.scalars().all()
-            return [TeamMemberRead.model_validate(team_membership) for team_membership in team_memberships] if team_memberships else None
+            return [TeamMemberRead.model_validate(team_membership) for team_membership in
+                    team_memberships] if team_memberships else None
 
     async def create_team_member(self, team_membership: TeamMemberCreate) -> TeamMember:
         async with self.insert_session_scope() as s:

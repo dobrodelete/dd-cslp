@@ -1,8 +1,11 @@
 from typing import Optional, List
+
 from sqlalchemy import select, update, delete
-from app.crud.base import CrudBase
-from app.models.category import Category
-from app.schemas.category import CategoryCreate, CategoryUpdate, CategoryRead
+
+from app.crud import CrudBase
+from app.models import Category
+from app.schemas import CategoryCreate, CategoryUpdate, CategoryRead
+
 
 class CategoryCrud(CrudBase):
     def __init__(self):

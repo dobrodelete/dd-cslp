@@ -1,5 +1,7 @@
 from typing import List
+
 from fastapi import APIRouter, HTTPException
+
 from app.crud import challenge_crud
 from app.schemas import ChallengeCreate, ChallengeUpdate, ChallengeRead
 

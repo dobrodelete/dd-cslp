@@ -1,8 +1,11 @@
 from typing import Optional, List
+
 from sqlalchemy import select, update
-from app.crud.base import CrudBase
-from app.models.challenge import Challenge
-from app.schemas.challenge import ChallengeCreate, ChallengeUpdate, ChallengeRead
+
+from app.crud import CrudBase
+from app.models import Challenge
+from app.schemas import ChallengeCreate, ChallengeUpdate, ChallengeRead
+
 
 class ChallengeCrud(CrudBase):
     def __init__(self):
