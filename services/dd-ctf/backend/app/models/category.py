@@ -1,6 +1,6 @@
 from typing import List
 
-from sqlalchemy import BigInteger
+from sqlalchemy import BigInteger, DateTime, func
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.models import Base
@@ -13,4 +13,9 @@ class Category(Base):
     name: Mapped[str] = mapped_column(unique=True, nullable=False)
     description: Mapped[str] = mapped_column(nullable=True)
 
-    challenges: Mapped[List["Challenge"]] = relationship("Challenge", back_populates="category")
+    challenges: Mapped[List["Challenge"]] = relationship(
+        "Challenge",
+        back_populates="category",
+        cascade="all, delete",
+        passive_deletes=True,
+    )

@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import List
+from typing import List, Optional
 
 from pydantic import BaseModel, ConfigDict
 
@@ -21,7 +21,13 @@ class ChallengeCreate(ChallengeBase):
 class ChallengeRead(ChallengeBase):
     id: int
     created_at: datetime
+    updated_at: datetime
 
 
 class ChallengeUpdate(ChallengeRead):
     pass
+
+
+class Challenges(BaseModel):
+    challenges: Optional[ChallengeRead]
+    total: Optional[int]

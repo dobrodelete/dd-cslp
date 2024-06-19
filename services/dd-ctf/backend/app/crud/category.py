@@ -1,6 +1,6 @@
 from typing import Optional, List
 
-from sqlalchemy import select, update, delete
+from sqlalchemy import select, update, delete, insert, func
 
 from app.crud import CrudBase
 from app.models import Category
@@ -23,12 +23,14 @@ class CategoryCrud(CrudBase):
             categories: Optional[List[Category]] = result.scalars().all()
             return [CategoryRead.model_validate(category) for category in categories] if categories else None
 
-    async def create_category(self, category: CategoryCreate) -> Category:
+    async def create_category(self, category: CategoryCreate) -> Optional[CategoryRead]:
         async with self.insert_session_scope() as s:
-            db_category = Category(**category.dict())
-            s.add(db_category)
-            await s.flush()
-            return db_category
+            result = await s.execute(
+                insert(Category).values(
+                    **category.dict()
+                ).returning(Category))
+            return_category: Optional[Category] = result.scalar_one_or_none()
+            return CategoryRead.model_validate(return_category) if return_category else None
 
     async def update_category(self, category: CategoryUpdate) -> Optional[CategoryRead]:
         async with self.insert_session_scope() as s:
@@ -41,9 +43,16 @@ class CategoryCrud(CrudBase):
             category: Optional[Category] = result.scalar()
             return CategoryRead.model_validate(category) if category else None
 
-    async def delete_category(self, id: int) -> None:
+    async def delete_category(self, id: int) -> bool:
         async with self.insert_session_scope() as s:
             await s.execute(
                 delete(Category)
                 .where(Category.id == id)
             )
+            return True
+
+    async def get_total(self, ) -> int:
+        async with self.read_session_scope() as s:
+            result = await s.execute(select(func.count("*")).select_from(Category))
+            count = result.scalar()
+            return count

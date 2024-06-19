@@ -8,7 +8,7 @@ class Submission(Base):
     __tablename__ = "submissions"
 
     id: Mapped[BigInteger] = mapped_column(BigInteger, primary_key=True, autoincrement=True)
-    challenge_id: Mapped[BigInteger] = mapped_column(BigInteger, ForeignKey("challenges.id"))
+    challenge_id: Mapped[BigInteger] = mapped_column(BigInteger, ForeignKey("challenges.id", ondelete="CASCADE"))
     user_id: Mapped[BigInteger] = mapped_column(BigInteger)
     submission_time: Mapped[DateTime] = mapped_column(DateTime, server_default=func.now())
     flag: Mapped[str] = mapped_column(nullable=False)

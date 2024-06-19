@@ -8,7 +8,7 @@ class TeamMember(Base):
     __tablename__ = "team_members"
 
     id: Mapped[BigInteger] = mapped_column(BigInteger, primary_key=True, autoincrement=True)
-    team_id: Mapped[BigInteger] = mapped_column(BigInteger, ForeignKey("teams.id"))
+    team_id: Mapped[BigInteger] = mapped_column(BigInteger, ForeignKey("teams.id", ondelete="CASCADE"))
     user_id: Mapped[BigInteger] = mapped_column(BigInteger)
     joined_at: Mapped[DateTime] = mapped_column(DateTime, server_default=func.now())
 

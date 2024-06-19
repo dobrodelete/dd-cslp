@@ -3,7 +3,7 @@ from typing import List
 from fastapi import APIRouter, HTTPException
 
 from app.crud import ctf_event_crud
-from app.schemas import CTFEventCreate, CTFEventRead, CTFEventUpdate
+from app.schemas import CTFEventCreate, CTFEventRead, CTFEventUpdate, CTFEvents
 
 router = APIRouter()
 
@@ -22,9 +22,14 @@ async def get_ctf_event(ctf_event_id: int):
     return ctf_event
 
 
-@router.get("/", response_model=List[CTFEventRead])
+@router.get("/", response_model=CTFEvents)
 async def get_ctf_events(skip: int = 0, limit: int = 100):
-    return await ctf_event_crud.get_ctf_events(skip=skip, limit=limit)
+    events = await ctf_event_crud.get_ctf_events(skip=skip, limit=limit)
+    total = await ctf_event_crud.get_total()
+    return CTFEvents(
+        events=events,
+        total=total
+    )
 
 
 @router.put("/{ctf_event_id}", response_model=CTFEventRead)

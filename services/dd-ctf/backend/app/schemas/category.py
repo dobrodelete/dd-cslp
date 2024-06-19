@@ -1,5 +1,5 @@
 from pydantic import BaseModel, ConfigDict
-from typing import Optional
+from typing import Optional, List
 from datetime import datetime
 
 
@@ -17,7 +17,13 @@ class CategoryCreate(CategoryBase):
 class CategoryRead(CategoryBase):
     id: int
     created_at: datetime
+    updated_at: datetime
 
 
 class CategoryUpdate(CategoryBase):
     id: int
+
+
+class Categories(BaseModel):
+    categories: Optional[List[CategoryRead]]
+    total: Optional[int]

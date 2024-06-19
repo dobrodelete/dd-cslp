@@ -18,6 +18,7 @@ class CTFEventRegistrationCreate(CTFEventRegistrationBase):
 class CTFEventRegistrationRead(CTFEventRegistrationBase):
     id: int
     created_at: datetime
+    updated_at: datetime
 
 
 class CTFEventRegistrationUpdate(CTFEventRegistrationBase):

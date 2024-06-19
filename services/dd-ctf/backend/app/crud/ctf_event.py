@@ -1,6 +1,6 @@
 from typing import Optional, List
 
-from sqlalchemy import select, update, delete
+from sqlalchemy import select, update, delete, func
 
 from app.crud import CrudBase
 from app.models import CTFEvent
@@ -28,8 +28,8 @@ class CTFEventCrud(CrudBase):
             db_ctf_event = CTFEvent(
                 name=ctf_event.name,
                 description=ctf_event.description,
-                start_time=ctf_event.start_time,
-                end_time=ctf_event.end_time,
+                start_time=ctf_event.start_time.replace(tzinfo=None),
+                end_time=ctf_event.end_time.replace(tzinfo=None),
                 active=ctf_event.active,
             )
             s.add(db_ctf_event)
@@ -44,8 +44,8 @@ class CTFEventCrud(CrudBase):
                 .values(
                     name=ctf_event.name,
                     description=ctf_event.description,
-                    start_time=ctf_event.start_time,
-                    end_time=ctf_event.end_time,
+                    start_time=ctf_event.start_time.replace(tzinfo=None),
+                    end_time=ctf_event.end_time.replace(tzinfo=None),
                     active=ctf_event.active,
                 )
                 .returning(CTFEvent)
@@ -56,3 +56,9 @@ class CTFEventCrud(CrudBase):
     async def delete_ctf_event(self, id: int) -> None:
         async with self.insert_session_scope() as s:
             await s.execute(delete(CTFEvent).where(CTFEvent.id == id))
+
+    async def get_total(self, ) -> int:
+        async with self.read_session_scope() as s:
+            result = await s.execute(select(func.count("*")).select_from(CTFEvent))
+            count = result.scalar()
+            return count

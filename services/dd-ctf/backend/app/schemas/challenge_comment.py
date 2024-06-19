@@ -18,6 +18,7 @@ class ChallengeCommentCreate(ChallengeCommentBase):
 class ChallengeCommentRead(ChallengeCommentBase):
     id: int
     created_at: datetime
+    updated_at: datetime
 
 
 class ChallengeCommentUpdate(ChallengeCommentBase):

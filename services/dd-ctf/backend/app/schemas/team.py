@@ -17,6 +17,7 @@ class TeamCreate(TeamBase):
 class TeamRead(TeamBase):
     id: int
     created_at: datetime
+    updated_at: datetime
 
 
 class TeamUpdate(TeamRead):

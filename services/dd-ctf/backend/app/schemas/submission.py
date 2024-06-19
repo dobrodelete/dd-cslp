@@ -20,6 +20,7 @@ class SubmissionRead(SubmissionBase):
     id: int
     submission_time: datetime
     created_at: datetime
+    updated_at: datetime
 
 
 class SubmissionUpdate(SubmissionRead):

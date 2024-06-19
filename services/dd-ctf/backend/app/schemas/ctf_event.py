@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import Optional
+from typing import Optional, List
 
 from pydantic import ConfigDict, BaseModel
 
@@ -21,7 +21,13 @@ class CTFEventCreate(CTFEventBase):
 class CTFEventRead(CTFEventBase):
     id: int
     created_at: datetime
+    updated_at: datetime
 
 
 class CTFEventUpdate(CTFEventBase):
     id: int
+
+
+class CTFEvents(BaseModel):
+    events: Optional[List[CTFEventRead]]
+    total: int

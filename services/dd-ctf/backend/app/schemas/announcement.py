@@ -17,6 +17,7 @@ class AnnouncementCreate(AnnouncementBase):
 class AnnouncementRead(AnnouncementBase):
     id: int
     created_at: datetime
+    updated_at: datetime
 
 
 class AnnouncementUpdate(AnnouncementBase):

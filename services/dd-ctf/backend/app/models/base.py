@@ -6,6 +6,8 @@ class Base(DeclarativeBase):
     __abstract__ = True
 
     created_at: Mapped[DateTime] = mapped_column(DateTime, server_default=func.now())
+    updated_at: Mapped[DateTime] = mapped_column(DateTime, server_default=func.now(), server_onupdate=func.now())
+
 
     @declared_attr
     def __tablename__(cls) -> str:

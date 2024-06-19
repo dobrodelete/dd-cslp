@@ -19,6 +19,7 @@ class LinkCreate(LinkBase):
 class LinkRead(LinkBase):
     id: int
     created_at: datetime
+    updated_at: datetime
 
 
 class LinkUpdate(LinkBase):

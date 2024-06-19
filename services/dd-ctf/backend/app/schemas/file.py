@@ -20,6 +20,7 @@ class FileCreate(FileBase):
 class FileRead(FileBase):
     id: int
     created_at: datetime
+    updated_at: datetime
 
 
 class FileUpdate(FileBase):

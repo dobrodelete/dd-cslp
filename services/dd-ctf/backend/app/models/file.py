@@ -12,8 +12,9 @@ class File(Base):
     id: Mapped[BigInteger] = mapped_column(BigInteger, primary_key=True, autoincrement=True)
     filename: Mapped[str] = mapped_column(nullable=False)
     filepath: Mapped[str] = mapped_column(nullable=False)
-    challenge_id: Mapped[Optional[BigInteger]] = mapped_column(BigInteger, ForeignKey("challenges.id"), nullable=True)
-    uploaded_at: Mapped[DateTime] = mapped_column(DateTime, server_default=func.now())
+    challenge_id: Mapped[Optional[BigInteger]] = mapped_column(BigInteger, ForeignKey("challenges.id", ondelete="CASCADE"), nullable=True)
 
-    challenge: Mapped[Optional["Challenge"]] = relationship("Challenge", back_populates="files")
-
+    challenge: Mapped[Optional["Challenge"]] = relationship(
+        "Challenge",
+        back_populates="files"
+    )

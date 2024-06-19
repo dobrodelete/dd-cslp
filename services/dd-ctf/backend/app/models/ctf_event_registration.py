@@ -9,7 +9,7 @@ class CTFEventRegistration(Base):
 
     id: Mapped[BigInteger] = mapped_column(BigInteger, primary_key=True, autoincrement=True)
     user_id: Mapped[BigInteger] = mapped_column(BigInteger, nullable=False)
-    event_id: Mapped[BigInteger] = mapped_column(BigInteger, ForeignKey("ctf_events.id"), nullable=False)
+    event_id: Mapped[BigInteger] = mapped_column(BigInteger, ForeignKey("ctf_events.id", ondelete="CASCADE"), nullable=False)
     registered_at: Mapped[DateTime] = mapped_column(DateTime, server_default=func.now())
 
-    event: Mapped["CTFEvent"] = relationship("CTFEvent", back_populates="registrations")
+    ctf_event: Mapped["CTFEvent"] = relationship("CTFEvent", back_populates="registrations")

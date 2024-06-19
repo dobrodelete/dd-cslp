@@ -1,6 +1,6 @@
 from typing import Optional, List
 
-from sqlalchemy import select, update
+from sqlalchemy import select, update, delete
 
 from app.crud import CrudBase
 from app.models import Challenge

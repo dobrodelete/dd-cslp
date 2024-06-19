@@ -14,4 +14,9 @@ class Team(Base):
     description: Mapped[str] = mapped_column(nullable=True)
     created_at: Mapped[DateTime] = mapped_column(DateTime, server_default=func.now())
 
-    members: Mapped[List["TeamMember"]] = relationship("TeamMember", back_populates="team")
+    members: Mapped[List["TeamMember"]] = relationship(
+        "TeamMember",
+        back_populates="team",
+        cascade="all, delete",
+        passive_deletes=True,
+    )

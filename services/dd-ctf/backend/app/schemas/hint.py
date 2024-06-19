@@ -17,6 +17,7 @@ class HintCreate(HintBase):
 class HintRead(HintBase):
     id: int
     created_at: datetime
+    updated_at: datetime
 
 
 class HintUpdate(HintRead):

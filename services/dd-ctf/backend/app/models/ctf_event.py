@@ -16,4 +16,15 @@ class CTFEvent(Base):
     end_time: Mapped[DateTime] = mapped_column(DateTime, nullable=False)
     active: Mapped[bool] = mapped_column(default=True)
 
-    challenges: Mapped[List["Challenge"]] = relationship("Challenge", back_populates="ctf_event")
+    challenges: Mapped[List["Challenge"]] = relationship(
+        "Challenge",
+        back_populates="ctf_event",
+        cascade="all, delete",
+        passive_deletes=True,
+    )
+    registrations: Mapped[List["CTFEventRegistration"]] = relationship(
+        "CTFEventRegistration",
+        back_populates="ctf_event",
+        cascade="all, delete",
+        passive_deletes=True,
+    )

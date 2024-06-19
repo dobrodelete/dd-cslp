@@ -1,9 +1,9 @@
 from .announcement import AnnouncementBase, AnnouncementCreate, AnnouncementRead, AnnouncementUpdate
-from .category import CategoryBase, CategoryCreate, CategoryRead, CategoryUpdate
-from .challenge import ChallengeBase, ChallengeCreate, ChallengeRead, ChallengeUpdate
+from .category import CategoryBase, CategoryCreate, CategoryRead, CategoryUpdate, Categories
+from .challenge import ChallengeBase, ChallengeCreate, ChallengeRead, ChallengeUpdate, Challenges
 from .challenge_comment import ChallengeCommentBase, ChallengeCommentCreate, ChallengeCommentRead, ChallengeCommentUpdate
 from .challenge_rating import ChallengeRatingBase, ChallengeRatingCreate, ChallengeRatingRead, ChallengeRatingUpdate
-from .ctf_event import CTFEventBase, CTFEventCreate, CTFEventRead, CTFEventUpdate
+from .ctf_event import CTFEventBase, CTFEventCreate, CTFEventRead, CTFEventUpdate, CTFEvents
 from .ctf_event_registration import CTFEventRegistrationBase, CTFEventRegistrationCreate, CTFEventRegistrationRead, \
     CTFEventRegistrationUpdate
 from .file import FileBase, FileCreate, FileRead, FileUpdate

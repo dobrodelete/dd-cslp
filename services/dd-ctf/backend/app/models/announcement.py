@@ -10,4 +10,3 @@ class Announcement(Base):
     id: Mapped[BigInteger] = mapped_column(BigInteger, primary_key=True, autoincrement=True)
     title: Mapped[str] = mapped_column(nullable=False)
     content: Mapped[str] = mapped_column(nullable=False)
-    created_at: Mapped[DateTime] = mapped_column(DateTime, server_default=func.now())
