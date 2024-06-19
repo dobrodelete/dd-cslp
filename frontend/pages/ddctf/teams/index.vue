@@ -35,10 +35,8 @@ const searchQuery = ref('');
 const currentPage = ref(1);
 const totalPages = ref(0);
 
-// Функции для загрузки данных, пока просто заглушки
 const fetchTeams = () => {
   console.log('Fetching teams with search query:', searchQuery.value);
-  // Тут будет реализация API запроса
   teams.value = [{ id: 1, name: 'Team Alpha', score: 300 }];
   totalPages.value = 2; // Пример количества страниц
 };
